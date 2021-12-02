@@ -1,15 +1,14 @@
-package days
+package main
 
 import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 
-	"github.com/Christheoreo/advent-of-code-2021/utils"
+	"github.com/Christheoreo/advent-of-code-2021/internal/filereader"
+	"github.com/Christheoreo/advent-of-code-2021/internal/timetrack"
 )
-
-// implements IDay
-type Bravo struct{}
 
 type instruction struct {
 	Command string
@@ -19,8 +18,8 @@ type instruction struct {
 var lines []string
 var instructions []instruction
 
-func (b Bravo) Setup() {
-	l, err := utils.ReadFileToStringArray("bravo.txt")
+func init() {
+	l, err := filereader.ReadFileToStringArray("bravo.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -43,14 +42,14 @@ func (b Bravo) Setup() {
 	}
 }
 
-func (b Bravo) Run() {
-	b.RunOne()
-	b.RunTwo()
+func main() {
+	defer timetrack.TimeTrack(time.Now(), "Bravo")
+	problemOne()
+	problemTwo()
 }
 
-// Problem one
-func (b Bravo) RunOne() {
-
+func problemOne() {
+	defer timetrack.TimeTrack(time.Now(), "Bravo - Problem One")
 	horizontalPos := 0
 	depth := 0
 
@@ -72,7 +71,8 @@ func (b Bravo) RunOne() {
 	fmt.Printf("Depth * horizontal posistion = %d\n", answer)
 }
 
-func (b Bravo) RunTwo() {
+func problemTwo() {
+	defer timetrack.TimeTrack(time.Now(), "Bravo - Problem two")
 	horizontalPos := 0
 	depth := 0
 	aim := 0
@@ -94,8 +94,4 @@ func (b Bravo) RunTwo() {
 	answer := depth * horizontalPos
 
 	fmt.Printf("Depth * horizontal posistion = %d\n", answer)
-}
-
-func (b Bravo) GetName() string {
-	return "Day 02"
 }

@@ -13,3 +13,5 @@ If you are attempting AOC, then don't look at my soloutions and come back anothe
 To keep things in order in directories, I have decided to use the phonetic alphabet for each day,E.g. Alpha = 01, Bravo = 02 ...
 
 Is this a good idea? Probably not! But it seems good in my head currently!
+
+Followed tbis [LINK](https://qvault.io/golang/golang-project-structure/) for structuring the project.
