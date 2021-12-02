@@ -9,6 +9,10 @@ import (
 // implements IDay
 type Alpha struct{}
 
+func (a Alpha) Setup() {
+	//
+}
+
 func (a Alpha) Run() {
 	a.RunOne()
 	a.RunTwo()

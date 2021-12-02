@@ -8,6 +8,7 @@ import (
 )
 
 type IDay interface {
+	Setup()
 	Run()
 	RunOne()
 	RunTwo()
@@ -15,15 +16,17 @@ type IDay interface {
 }
 
 func main() {
-	day := days.Alpha{}
+	day := days.Bravo{}
 	solveProblem(day)
 }
 
 func solveProblem(day IDay) {
 	defer timeTrack(time.Now(), day.GetName())
+	day.Setup()
 	// Run problem one for now
 	// day.RunOne()
-	day.RunTwo()
+	// day.RunTwo()
+	day.Run()
 }
 
 func timeTrack(start time.Time, name string) {
