@@ -9,8 +9,20 @@ import (
 	"github.com/Christheoreo/advent-of-code-2021/internal/timetrack"
 )
 
+var depths []int
+
 func init() {
-	//
+	depthsStringArr, err := filereader.ReadFileToStringArray("alpha.txt")
+
+	if err != nil {
+		panic(err)
+	}
+
+	depths, err = converter.ConvertStringArrayToIntArray(depthsStringArr)
+
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
@@ -21,17 +33,6 @@ func main() {
 
 func problemOne() {
 	defer timetrack.TimeTrack(time.Now(), "Alpha - Problem one")
-	depthsStringArr, err := filereader.ReadFileToStringArray("alpha.txt")
-
-	if err != nil {
-		panic(err)
-	}
-
-	depths, err := converter.ConvertStringArrayToIntArray(depthsStringArr)
-
-	if err != nil {
-		panic(err)
-	}
 
 	bar := depths[0]
 	incremenets := 0
@@ -48,17 +49,6 @@ func problemOne() {
 
 func problemTwo() {
 	defer timetrack.TimeTrack(time.Now(), "Alpha - Problem two")
-	depthsStringArr, err := filereader.ReadFileToStringArray("alpha.txt")
-
-	if err != nil {
-		panic(err)
-	}
-
-	depths, err := converter.ConvertStringArrayToIntArray(depthsStringArr)
-
-	if err != nil {
-		panic(err)
-	}
 
 	depthsOfThree := make([]int, 0)
 	total := 0
