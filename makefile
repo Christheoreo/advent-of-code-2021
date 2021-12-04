@@ -18,3 +18,4 @@ build:
     go build -o bin/bravo ./cmd/bravo
     go build -o bin/charlie ./cmd/charlie
     go build -o bin/delta ./cmd/delta
+    go build -o bin/echo ./cmd/echo
