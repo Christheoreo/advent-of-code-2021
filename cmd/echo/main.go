@@ -24,9 +24,7 @@ type CooridinateWithOverlap struct {
 
 var coordinates [][]Cooridinate
 
-var grid []CooridinateWithOverlap
-
-var gridTwo [][]int
+var grid [][]int
 
 func init() {
 	coordinates = make([][]Cooridinate, 0)
@@ -36,7 +34,7 @@ func init() {
 		panic(err)
 	}
 
-	gridTwo = make([][]int, 0)
+	grid = make([][]int, 0)
 
 	for _, line := range lines {
 		parts := strings.Split(line, " -> ")
@@ -79,10 +77,10 @@ func init() {
 	}
 
 	for row := 0; row <= bottomRight.Y; row++ {
-		gridTwo = append(gridTwo, make([]int, 0))
+		grid = append(grid, make([]int, 0))
 
 		for col := 0; col <= bottomRight.X; col++ {
-			gridTwo[row] = append(gridTwo[row], 0)
+			grid[row] = append(grid[row], 0)
 		}
 	}
 }
@@ -104,10 +102,10 @@ func problemOne() {
 
 	for _, point := range points {
 		// gridTwo[point.X][point.Y] += 1
-		gridTwo[point.Y][point.X] += 1
+		grid[point.Y][point.X] += 1
 	}
 
-	answer := returnPointsWithXOrMoreOverlaps(2, gridTwo)
+	answer := returnPointsWithXOrMoreOverlaps(2, grid)
 	fmt.Printf("Answer = %d", answer)
 
 }
@@ -120,9 +118,9 @@ func problemTwo() {
 	points := drawOutLines(lines)
 
 	for _, point := range points {
-		gridTwo[point.Y][point.X]++
+		grid[point.Y][point.X]++
 	}
-	answer := returnPointsWithXOrMoreOverlaps(2, gridTwo)
+	answer := returnPointsWithXOrMoreOverlaps(2, grid)
 	fmt.Printf("Answer = %d", answer)
 }
 
