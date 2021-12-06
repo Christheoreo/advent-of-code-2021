@@ -20,3 +20,4 @@ build:
     go build -o bin/delta ./cmd/delta
     go build -o bin/echo ./cmd/echo
     go build -o bin/foxtrot ./cmd/foxtrot
+    go build -o bin/golf ./cmd/golf
