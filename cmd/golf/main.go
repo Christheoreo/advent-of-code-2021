@@ -87,15 +87,12 @@ func calculateMovementCost(x int, incrementalFuelCost bool, positions []int) int
 		}
 
 		if incrementalFuelCost {
-			toAdd := 0
 			for i := 1; i <= diff; i++ {
-				toAdd += i
+				total += i
 			}
-			total += toAdd
-
-		} else {
-			total += diff
+			continue
 		}
+		total += diff
 	}
 	return total
 }
