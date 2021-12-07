@@ -21,3 +21,4 @@ build:
     go build -o bin/echo ./cmd/echo
     go build -o bin/foxtrot ./cmd/foxtrot
     go build -o bin/golf ./cmd/golf
+    go build -o bin/hotel ./cmd/hotel

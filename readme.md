@@ -14,4 +14,17 @@ To keep things in order in directories, I have decided to use the phonetic alpha
 
 Is this a good idea? Probably not! But it seems good in my head currently!
 
-Followed tbis [LINK](https://qvault.io/golang/golang-project-structure/) for structuring the project.
+Followed this [LINK](https://qvault.io/golang/golang-project-structure/) for structuring the project.
+
+# Progress
+
+| Day | Done ? |
+| --- | ------ |
+| 1   | [x]    |
+| 2   | [x]    |
+| 3   | [x]    |
+| 4   | [x]    |
+| 5   | [x]    |
+| 6   | [x]    |
+| 7   | [x]    |
+| 8   | [ ]    |
