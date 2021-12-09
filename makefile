@@ -23,3 +23,4 @@ build:
     go build -o bin/golf ./cmd/golf
     go build -o bin/hotel ./cmd/hotel
     go build -o bin/india ./cmd/india
+    go build -o bin/juliet ./cmd/juliet
