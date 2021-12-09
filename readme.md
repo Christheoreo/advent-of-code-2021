@@ -27,4 +27,5 @@ Followed this [LINK](https://qvault.io/golang/golang-project-structure/) for str
 | 5   | [x]    |
 | 6   | [x]    |
 | 7   | [x]    |
-| 8   | [ ]    |
+| 8   | [x]    |
+| 9   | [x]    |
