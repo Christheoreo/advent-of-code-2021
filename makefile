@@ -26,3 +26,4 @@ build:
     go build -o bin/juliet ./cmd/juliet
     go build -o bin/kilo ./cmd/kilo
     go build -o bin/lima ./cmd/lima
+    go build -o bin/mike ./cmd/mike
