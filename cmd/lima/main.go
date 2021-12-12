@@ -9,11 +9,6 @@ import (
 	"github.com/Christheoreo/advent-of-code-2021/internal/timetrack"
 )
 
-type Cave struct {
-	Name           string
-	ConnectedCaves []Cave
-}
-
 var caves map[string][]string
 
 var routesThatMakeItToEnd [][]string
