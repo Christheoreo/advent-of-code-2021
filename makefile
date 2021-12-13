@@ -27,3 +27,4 @@ build:
     go build -o bin/kilo ./cmd/kilo
     go build -o bin/lima ./cmd/lima
     go build -o bin/mike ./cmd/mike
+    go build -o bin/november ./cmd/november
