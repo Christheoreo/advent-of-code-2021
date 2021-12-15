@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 	"time"
 
@@ -25,12 +26,9 @@ func setup() {
 
 	for index, line := range lines {
 		parts := strings.Split(line, "->")
-
 		a := strings.TrimSpace(parts[0])
 		b := strings.TrimSpace(parts[1])
-
 		insertionRules[index] = []string{a, b}
-
 	}
 }
 func main() {
@@ -49,13 +47,7 @@ func problemOne() {
 
 	for i := 0; i <= len(t)-2; i++ {
 		key := fmt.Sprintf("%s%s", t[i], t[i+1])
-		_, ok := template[key]
-
-		if !ok {
-			template[key] = 1
-		} else {
-			template[key]++
-		}
+		template[key]++
 	}
 
 	for _, r := range insertionRules {
@@ -82,13 +74,7 @@ func problemTwo() {
 
 	for i := 0; i <= len(t)-2; i++ {
 		key := fmt.Sprintf("%s%s", t[i], t[i+1])
-		_, ok := template[key]
-
-		if !ok {
-			template[key] = 1
-		} else {
-			template[key]++
-		}
+		template[key]++
 	}
 	for _, r := range insertionRules {
 		rules[r[0]] = r[1]
@@ -109,28 +95,13 @@ func completeStep(template map[string]int, rules map[string]string) map[string]i
 
 	for key, val := range template {
 		char, ok := rules[key]
-
 		if !ok {
 			continue
 		}
-
 		patternA := fmt.Sprintf("%s%s", string(key[0]), char)
 		patternB := fmt.Sprintf("%s%s", char, string(key[1]))
-
-		_, aok := newTemplate[patternA]
-		_, bok := newTemplate[patternB]
-
-		if aok {
-			newTemplate[patternA] += val
-		} else {
-			newTemplate[patternA] = val
-		}
-
-		if bok {
-			newTemplate[patternB] += val
-		} else {
-			newTemplate[patternB] = val
-		}
+		newTemplate[patternA] += val
+		newTemplate[patternB] += val
 
 	}
 
@@ -138,55 +109,19 @@ func completeStep(template map[string]int, rules map[string]string) map[string]i
 }
 
 func getCounts(data map[string]int) (int, int) {
-
 	counts := make(map[string]int)
-
-	largest := 0
-	smallest := 0
-
 	for key, val := range data {
-
-		_, ok := counts[string(key[0])]
-
-		if !ok {
-			counts[string(key[0])] = val
-		} else {
-			counts[string(key[0])] += val
-		}
+		counts[string(key[0])] += val
 	}
 
 	lastKey := string(origonalTemplate[len(origonalTemplate)-1])
+	counts[lastKey]++
 
-	_, ok := counts[lastKey]
-
-	if ok {
-		counts[lastKey] += 1
-	} else {
-		counts[lastKey] = 1
-	}
-
+	numbers := make([]int, 0)
 	for _, val := range counts {
-
-		if largest == 0 {
-			largest = val
-			continue
-		}
-
-		if smallest == 0 {
-			smallest = val
-			continue
-		}
-
-		if val > largest {
-			largest = val
-			continue
-		}
-
-		if val < smallest {
-			smallest = val
-			continue
-		}
+		numbers = append(numbers, val)
 	}
 
-	return largest, smallest
+	sort.Ints(numbers)
+	return numbers[len(numbers)-1], numbers[0]
 }
