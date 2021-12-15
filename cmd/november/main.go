@@ -12,11 +12,6 @@ import (
 var origonalTemplate string
 var insertionRules [][]string
 
-type X struct {
-	ToInsert string
-	Index    int
-}
-
 func init() {
 	setup()
 }
