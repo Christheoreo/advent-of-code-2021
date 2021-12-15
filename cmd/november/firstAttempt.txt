@@ -1,0 +1,186 @@
+package main
+
+import (
+	"fmt"
+	"sort"
+	"strings"
+	"time"
+
+	"github.com/Christheoreo/advent-of-code-2021/internal/filereader"
+	"github.com/Christheoreo/advent-of-code-2021/internal/timetrack"
+)
+
+var origonalTemplate string
+var insertionRules [][]string
+
+type X struct {
+	ToInsert string
+	Index    int
+}
+
+func init() {
+	setup()
+}
+
+func setup() {
+	lines, _ := filereader.ReadFileToStringArray("november-test.txt")
+	// lines, _ := filereader.ReadFileToStringArray("november.txt")
+
+	origonalTemplate = lines[0]
+	lines = lines[2:]
+	insertionRules = make([][]string, len(lines))
+
+	for index, line := range lines {
+		parts := strings.Split(line, "->")
+
+		a := strings.TrimSpace(parts[0])
+		b := strings.TrimSpace(parts[1])
+
+		insertionRules[index] = []string{a, b}
+
+	}
+}
+func main() {
+	defer timetrack.TimeTrack(time.Now(), "November")
+	problemOne()
+	setup()
+	problemTwo()
+}
+
+func problemOne() {
+	defer timetrack.TimeTrack(time.Now(), "November - Problem One")
+
+	template := origonalTemplate
+
+	for i := 0; i < 3; i++ {
+		template = complateStep(template, insertionRules)
+		fmt.Printf("template after step %d = %s\n", i+1, template)
+		// fmt.Printf("%d\n", i+1)
+	}
+
+	counts := getCounts(template)
+
+	largest := 0
+	smallest := 0
+
+	for _, val := range counts {
+		if largest == 0 {
+			largest = val
+			continue
+		}
+
+		if smallest == 0 {
+			smallest = val
+			continue
+		}
+
+		if val > largest {
+			largest = val
+			continue
+		}
+
+		if val < smallest {
+			smallest = val
+			continue
+		}
+	}
+
+	answer := largest - smallest
+
+	fmt.Printf("Tht largest (%d) - the smallest (%d) is %d\n", largest, smallest, answer)
+
+}
+
+func problemTwo() {
+	defer timetrack.TimeTrack(time.Now(), "November - Problem two")
+	//
+}
+
+func complateStep(template string, rules [][]string) string {
+
+	newTemplate := template
+
+	toInsert := make(map[int]string)
+
+	// fmt.Println("Starting Rules loop")
+	for _, rule := range rules {
+		pairToFind := rule[0]
+
+		charToInsert := rule[1]
+		indexes := findAllIndexes(template, pairToFind)
+
+		if len(indexes) < 1 {
+			continue
+		}
+
+		// fmt.Printf("Looping through %d indexes\n", len(indexes))
+		for _, index := range indexes {
+			// fmt.Printf("Need to insert %s as %d\n", charToInsert, index+1)s
+			toInsert[index+1] = charToInsert
+		}
+	}
+
+	keys := make([]int, 0)
+
+	// fmt.Println("Mapping keys")
+	for key := range toInsert {
+		keys = append(keys, key)
+	}
+	// fmt.Println("Sorting keys")
+	sort.Ints(keys)
+	// fmt.Println("Sorted keys")
+	// fmt.Printf("Inserting keys (%d)\n", len(keys))
+
+	for i := len(keys) - 1; i >= 0; i-- {
+		val := toInsert[keys[i]]
+		// fmt.Printf("Inserted key %d out of %d,\n", x, len(keys))
+		newTemplate = insertStringAtPos(newTemplate, val, keys[i])
+
+		// if i%1000 == 0 {
+		// 	fmt.Printf("%d of %d\n", i, len(keys))
+		// }
+	}
+	// fmt.Printf("Instered all keys %d\n", len(keys))
+
+	return newTemplate
+}
+
+func insertStringAtPos(src string, substr string, pos int) string {
+	var sb strings.Builder
+
+	sb.WriteString(src[0:pos])
+
+	sb.WriteString(substr)
+	sb.WriteString(src[pos:])
+	return sb.String()
+}
+
+func getCounts(str string) map[rune]int {
+
+	m := make(map[rune]int)
+	for _, char := range str {
+		_, ok := m[char]
+
+		if ok {
+			m[char] += 1
+			continue
+		}
+
+		m[char] = 1
+	}
+
+	return m
+}
+
+func findAllIndexes(src string, str string) []int {
+	indexes := make([]int, 0)
+
+	for i := 0; i <= len(src)-2; i++ {
+		pair := src[i : i+2]
+		if pair == str {
+			indexes = append(indexes, i)
+		}
+	}
+
+	return indexes
+}
