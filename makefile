@@ -28,3 +28,4 @@ build:
     go build -o bin/lima ./cmd/lima
     go build -o bin/mike ./cmd/mike
     go build -o bin/november ./cmd/november
+    go build -o bin/oscar ./cmd/oscar
